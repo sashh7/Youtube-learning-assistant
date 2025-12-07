@@ -1,0 +1,614 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+  width: 400px;
+  min-height: 600px;
+  transition: all 0.3s ease;
+}
+
+/* Light theme */
+.light-theme {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
+}
+
+.light-theme .container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.light-theme .header {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: white;
+}
+
+.light-theme .action-btn.primary {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: white;
+}
+
+.light-theme .action-btn.secondary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.light-theme .input-wrapper {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+}
+
+.light-theme .output-wrapper {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+}
+
+.light-theme #outputBox {
+  background: transparent;
+  color: #1e293b;
+}
+
+/* Dark theme */
+.dark-theme {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f1f5f9;
+}
+
+.dark-theme .container {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dark-theme .header {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: white;
+}
+
+.dark-theme .action-btn.primary {
+  background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+  color: white;
+}
+
+.dark-theme .action-btn.secondary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.dark-theme .input-wrapper {
+  background: #334155;
+  border: 2px solid #475569;
+}
+
+.dark-theme .output-wrapper {
+  background: #334155;
+  border: 2px solid #475569;
+}
+
+.dark-theme #outputBox {
+  background: transparent;
+  color: #f1f5f9;
+}
+
+.dark-theme h2 {
+  color: #cbd5e1;
+}
+
+/* Container */
+.container {
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  margin: 8px;
+  width: 384px;
+}
+
+/* Header */
+.header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-icon {
+  font-size: 24px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.logo h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.theme-icon {
+  font-size: 16px;
+  display: block;
+}
+
+/* Sections */
+.actions-section,
+.question-section,
+.output-section {
+  padding: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.output-section {
+  border-bottom: none;
+}
+
+.dark-theme .actions-section,
+.dark-theme .question-section,
+.dark-theme .output-section {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-btn:hover::before {
+  left: 100%;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+.btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Input Group */
+.input-group {
+  margin-top: 8px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.input-wrapper:focus-within {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#questionInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 8px;
+  outline: none;
+}
+
+#questionInput::placeholder {
+  opacity: 0.6;
+}
+
+.ask-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ask-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ask-icon {
+  font-size: 16px;
+  display: block;
+}
+
+/* Output Section */
+.output-wrapper {
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#outputBox {
+  width: 100%;
+  border: none;
+  padding: 16px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  border-radius: 12px;
+}
+
+#outputBox::placeholder {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.output-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: medium;
+}
+
+.results-header h2 {
+  margin: 0;
+}
+
+.copy-btn,
+.clear-btn {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 10px;
+  opacity: 0.7;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+}
+
+.copy-btn span,
+.clear-btn span {
+  font-size: 16px;
+}
+
+.copy-btn:hover,
+.clear-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.dark-theme .copy-btn,
+.dark-theme .clear-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .copy-btn:hover,
+.dark-theme .clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Scrollbar styling */
+#outputBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+#outputBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#outputBox::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.dark-theme #outputBox::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#outputBox::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme #outputBox::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .container {
+    margin: 4px;
+    width: calc(100vw - 8px);
+  }
+  
+  .header {
+    padding: 16px 20px;
+  }
+  
+  .actions-section,
+  .question-section,
+  .output-section {
+    padding: 20px;
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.card-question {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+  position: relative;
+}
+
+.card-question::after {
+  content: '+';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 400;
+  color: #6b7280;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .card-question::after {
+  color: #374151;
+}
+
+.card-answer {
+  max-height: 500px;
+  opacity: 1;
+  padding: 20px 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4b5563;
+  background: #f9fafb;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.card-answer.hidden {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 24px;
+}
+
+/* Rotate the plus icon when answer is visible */
+.card:not(:has(.card-answer.hidden)) .card-question::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Alternative for browsers that don't support :has() */
+.card.expanded .card-question::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .card-container {
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .card-question {
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+  
+  .card-question::after {
+    right: 20px;
+    font-size: 18px;
+  }
+  
+  .card-answer {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+  
+  .card-answer.hidden {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-question {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  
+  .card-question::after {
+    right: 16px;
+  }
+  
+  .card-answer {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+  
+  .card-answer.hidden {
+    padding: 0 16px;
+  }
+}
+
+/* Focus styles for accessibility */
+.card:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ========== Light Theme Flashcards ========== */
+.light-theme .card {
+  background: linear-gradient(135deg, #7c3aed 0%, #ddd6fe 100%);
+  border: 1px solid #a78bfa;
+  box-shadow: 0 4px 8px rgba(124, 58, 237, 0.15);
+}
+
+.light-theme .card-question {
+  background: rgba(245, 243, 255, 0.6);
+  color: #4c1d95;
+  border-bottom: 1px solid #c4b5fd;
+}
+
+.light-theme .card-answer {
+  background: rgba(237, 233, 254, 0.4);
+  color: #5b21b6;
+}
+
+/* ========== Dark Theme Flashcards ========== */
+.dark-theme .card {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  border: 1px solid #8b5cf6;
+  box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
+}
+
+.dark-theme .card-question {
+  background: rgba(30, 27, 75, 0.2);
+  color: #e0e7ff;
+  border-bottom: 1px solid #8b5cf6;
+}
+
+.dark-theme .card-answer {
+  background: rgba(49, 46, 129, 0.1);
+  color: #c7d2fe;
+}
